@@ -8,10 +8,10 @@
 import type { Locale, Localized } from '@/lib/i18n'
 
 export const SITE = {
-  name: 'UNTITLED',
-  handle: '@untitled.arc',
-  email: 'hola@untitled.studio',
-  since: 2021,
+  name: 'www',
+  handle: '@widostorm',
+  email: 'w@wido.jp',
+  since: 2015,
 }
 
 export type ImageAsset = {
@@ -23,13 +23,22 @@ export type ImageAsset = {
   filename: string
 }
 
-const img = (id: string, width: number, height: number, filename?: string): ImageAsset => ({
+const img = (
+  id: string,
+  width: number,
+  height: number,
+  src: string,
+  dir = '',
+  filename = src,
+): ImageAsset => ({
   id,
-  src: `/img/${id}.jpg`,
+  src: (`/img/${dir ? `${dir}/` : ''}${src}`),
   width,
   height,
-  filename: filename ?? `${id}.jpg`,
+  filename,
 })
+
+
 
 export const IMAGES = {
   'cover-01': img('cover-01', 1024, 1024, 'frost_final_v3.jpg'),
@@ -40,8 +49,9 @@ export const IMAGES = {
   'illus-01': img('illus-01', 896, 1200, 'white_room.jpg'),
   'live-01': img('live-01', 1376, 768, 'live_screen_IMG_0412.jpg'),
   'process-01': img('process-01', 1200, 896, 'thumbnails_tracing.jpg'),
-  'ref-01': img('ref-01', 1200, 896, 'magazine_spread_1984.jpg'),
-  'ref-02': img('ref-02', 896, 1200, 'concrete_facade.jpg'),
+  'ref-01': img('ref-01', 1023, 1280, 'ref-01.jpg', 'refs/revenge-x-aeri'),
+  'screenshot1': img('screenshot1', 1002, 634, 'screenshot1.jpg', 'refs/revenge-x-aeri'),
+  
 } satisfies Record<string, ImageAsset>
 
 export type ImageId = keyof typeof IMAGES
@@ -187,7 +197,7 @@ export const ARCHIVE: ArchiveEntry[] = [
   {
     id: 'a01',
     code: 'A-031',
-    title: { es: 'Frost — miniaturas y pruebas', en: 'Frost — thumbnails and tests', ja: 'Frost — サムネイルと試作', ko: 'Frost — 썸네일과 테스트', zh: 'Frost — 缩略稿与测试' },
+    title: { es: 'R', en: 'Frost — thumbnails and tests', ja: 'Frost — サムネイルと試作', ko: 'Frost — 썸네일과 테스트', zh: 'Frost — 缩略稿与测试' },
     date: '2026-09-12',
     status: 'published',
     images: ['process-01', 'cover-01'],
@@ -287,73 +297,20 @@ export type RefPost = {
 
 export const REFS: RefPost[] = [
   {
-    slug: 'revistas-de-diseno-japonesas',
-    code: 'R-012',
+    slug: 'REVENGE x AERI',
+    code: 'R-01',
     title: {
-      es: 'La retícula que no se esconde',
-      en: 'The grid that doesn’t hide',
-      ja: '隠れないグリッド',
-      ko: '숨지 않는 그리드',
-      zh: '不隐藏的网格',
+      es: 'REVENGE x AERI',
+      en: 'REVENGE x AERI',
+      ja: 'REVENGE x AERI',
+      ko: 'REVENGE x AERI',
+      zh: 'REVENGE x AERI',
     },
-    date: '2026-10-18',
-    tags: ['editorial', 'tipografía'],
+    date: '31-10-2026',
+    tags: ['fashion', 'merch'],
     cover: 'ref-01',
     excerpt: {
-      es: 'Una revista de diseño de los ochenta encontrada en un mercadillo, y por qué la retícula visible me parece honesta.',
-      en: 'An ’80s design magazine found at a flea market, and why a visible grid feels honest to me.',
-      ja: 'のみの市で見つけた80年代のデザイン誌と、見えるグリッドが誠実だと思う理由。',
-      ko: '벼룩시장에서 찾은 80년대 디자인 잡지, 그리고 보이는 그리드가 정직하게 느껴지는 이유.',
-      zh: '在跳蚤市场找到的一本八十年代设计杂志，以及为何我觉得可见的网格是诚实的。',
-    },
-    body: {
-      es: [
-        'En un mercadillo encontré una [[ref-01|revista de diseño de 1984]]. Lo primero que me llamó la atención no fueron las imágenes, sino que la retícula estaba ahí, a la vista, como un andamio que nadie se molestó en quitar.',
-        'Pensé en la [[ref-02|fachada de hormigón]] que veo cada mañana: ventanas iguales, repetidas, y aun así nunca aburre. El orden no le quita vida; se la da, porque cualquier pequeña irregularidad se nota.',
-        'Eso es lo que intenté en las [[process-01|miniaturas de Frost]]: dejar que la estructura se vea. Al final la [[cover-01|portada]] es casi vacía, pero el vacío está medido.',
-        'Me guardo esta idea para el archivo: la página blanca no es ausencia, es un sistema esperando que algo lo rompa.',
-      ],
-      en: [
-        'At a flea market I found a [[ref-01|design magazine from 1984]]. What caught my eye first wasn’t the images but the grid: right there, visible, like scaffolding nobody bothered to remove.',
-        'It reminded me of the [[ref-02|concrete facade]] I pass every morning: identical windows, repeated, yet never boring. Order doesn’t drain the life out of it; it gives it life, because any small irregularity shows.',
-        'That’s what I tried in the [[process-01|Frost thumbnails]]: let the structure show. In the end the [[cover-01|cover]] is almost empty, but the emptiness is measured.',
-        'Keeping this idea for the archive: a white page isn’t absence, it’s a system waiting for something to break it.',
-      ],
-      ja: [
-        'のみの市で[[ref-01|1984年のデザイン誌]]を見つけた。まず目を引いたのは図版ではなくグリッドだった。誰も外そうとしなかった足場のように、そのまま見えていた。',
-        '毎朝通る[[ref-02|コンクリートのファサード]]を思い出した。同じ窓の繰り返しなのに、決して退屈ではない。秩序は生気を奪わない。むしろ小さな不規則さが目立つから、生気を与える。',
-        '[[process-01|Frostのサムネイル]]で試したのもそれだった。構造を見せること。最終的な[[cover-01|ジャケット]]はほとんど空っぽだが、その余白は測られている。',
-        'この考えをアーカイブに残しておく。白いページは不在ではなく、何かに壊されるのを待っているシステムだ。',
-      ],
-      ko: [
-        '벼룩시장에서 [[ref-01|1984년 디자인 잡지]]를 발견했다. 먼저 눈에 들어온 건 이미지가 아니라 그리드였다. 아무도 치우지 않은 비계처럼 그대로 드러나 있었다.',
-        '매일 아침 지나치는 [[ref-02|콘크리트 파사드]]가 떠올랐다. 똑같은 창문의 반복인데도 지루하지 않다. 질서는 생기를 빼앗지 않는다. 작은 불규칙이 드러나기에 오히려 생기를 준다.',
-        '[[process-01|Frost 썸네일]]에서 시도한 것도 그것이었다. 구조를 드러내기. 결국 [[cover-01|커버]]는 거의 비어 있지만, 그 여백은 계산되어 있다.',
-        '이 생각을 아카이브에 남긴다. 하얀 페이지는 부재가 아니라, 무언가가 깨뜨려주기를 기다리는 시스템이다.',
-      ],
-      zh: [
-        '我在跳蚤市场找到一本[[ref-01|1984 年的设计杂志]]。最先吸引我的不是图片，而是网格：它就在那里，清晰可见，像一副没人费心拆掉的脚手架。',
-        '这让我想起每天早上路过的[[ref-02|混凝土立面]]：相同的窗户不断重复，却从不乏味。秩序并没有夺走生命力，反而赋予它，因为任何细小的不规则都会显现。',
-        '这正是我在[[process-01|Frost 缩略稿]]中尝试的：让结构显露。最终的[[cover-01|封面]]几乎是空的，但这份空是经过度量的。',
-        '把这个想法存进档案：白纸不是缺席，而是一个等待被打破的系统。',
-      ],
-    },
-  },
-  {
-    slug: 'tendidos-electricos',
-    code: 'R-011',
-    title: {
-      es: 'Cables en el cielo',
-      en: 'Cables in the sky',
-      ja: '空の電線',
-      ko: '하늘의 전선',
-      zh: '天空中的电线',
-    },
-    date: '2026-08-29',
-    tags: ['anime', 'paisaje'],
-    cover: 'header-01',
-    excerpt: {
-      es: 'Por qué los tendidos eléctricos aparecen en tantas escenas de verano, y qué hacen con el espacio vacío.',
+      es: 'esto más que un articulo es un test para probar la visualización de la página, tengo bastante tiempo que no escribo artículos, así que si sueno medio aweonao, ya saben',
       en: 'Why power lines show up in so many summer scenes, and what they do with empty space.',
       ja: 'なぜ電線は多くの夏の情景に現れるのか、そして余白に何をもたらすのか。',
       ko: '왜 전선은 수많은 여름 장면에 등장하는지, 그리고 빈 공간에 무엇을 하는지.',
@@ -361,9 +318,10 @@ export const REFS: RefPost[] = [
     },
     body: {
       es: [
-        'Llevo semanas fijándome en los [[header-01|tendidos eléctricos]] de las escenas de verano. Cortan el cielo en franjas y, sin ellos, el cielo sería solo un color.',
-        'Lo mismo pasa en la [[cover-03|azotea al atardecer]]: las antenas son lo que hace que el cielo parezca enorme. Una línea fina basta para dar escala.',
-        'Apunto para el próximo header: menos cielo pintado, más líneas que lo midan.',
+        'No soy alguien que esté metido en la moda / ropa porque tampoco es que me interese estarlo, pero, por joyas como esta lo recapacito',
+        'Lo primero que me salió [[screenshot1|en mi feed de ig fue la collab de REVENGE x AERI,]] y ya era hora, desde hace bastante se le veía utilizando prendas de REVENGE y me extrañaba que no se llegasen a cruzar',
+        'Cómo dije, no soy un experto mamador en la materia para dar una opinión de no mames, simplemente me gusta la collab y cómo se Aeri en las fotos, oficialmente es una modelo emo🗣, personalmente mi prenda favorita es PHOTOBOOTH ZIP WHITE aunque ni en pedo me gasto 118 cucufloros por una chaqueta no mamen, además, quién su sano juicio compraría una prenda por cuotas?😭',
+
       ],
       en: [
         'For weeks I’ve been noticing the [[header-01|power lines]] in summer scenes. They slice the sky into strips; without them, the sky would just be a color.',

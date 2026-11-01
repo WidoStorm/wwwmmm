@@ -65,14 +65,13 @@ function RefPostPage() {
         <p className="label border-b border-black/[0.06] py-2 md:pl-[16.66%]">{t('refs.translationNote')}</p>
       )}
 
-      {/* Body: paragraph number · text · the figures cited in that paragraph */}
+            {/* Body: paragraph number · text (figures open in the viewer on click) */}
       <div className="py-6">
-        {paragraphs.map((segments, pi) => {
-          const cites = segments.filter((s) => s.kind === 'cite')
-          return (
-            <section key={pi} className="grid gap-4 py-6 md:grid-cols-12 md:gap-8">
-              <div className="label pt-1 md:col-span-2">¶ {pad(pi + 1)}</div>
-              <p className="text-[17px] leading-[1.75] md:col-span-6 md:text-[18px]">
+        {paragraphs.map((segments, pi) => (
+          <section key={pi} className="grid gap-4 py-6 md:grid-cols-12 md:gap-8">
+            <div className="label pt-1 md:col-span-2">¶ {pad(pi + 1)}</div>
+            <div className="md:col-span-7">
+              <p className="text-[17px] leading-[1.75] md:text-[18px]">
                 {segments.map((s, si) =>
                   s.kind === 'text' ? (
                     <span key={si}>{s.text}</span>
@@ -89,37 +88,11 @@ function RefPostPage() {
                   ),
                 )}
               </p>
-              <div className="flex flex-wrap items-start gap-3 md:col-span-4">
-                {cites.map((c) => {
-                  if (c.kind !== 'cite') return null
-                  const asset = IMAGES[c.image]
-                  const portrait = asset.height > asset.width
-                  return (
-                    <button
-                      key={c.index}
-                      type="button"
-                      onClick={(e) => openImage(c.image, e, `fig. ${pad(c.index)} — ${c.text}`)}
-                      className="group cursor-zoom-in text-left"
-                      style={{ width: portrait ? '38%' : '58%' }}
-                    >
-                      <img
-                        src={cdn(asset.src, 500)}
-                        alt={c.text}
-                        loading="lazy"
-                        className="w-full bg-[#f3f3f3] transition-opacity group-hover:opacity-85"
-                        style={{ aspectRatio: `${asset.width} / ${asset.height}` }}
-                      />
-                      <span className="label mt-1 block truncate">
-                        {pad(c.index)} · {asset.filename}
-                      </span>
-                    </button>
-                  )
-                })}
-              </div>
-            </section>
-          )
-        })}
+            </div>
+          </section>
+        ))}
       </div>
+
 
       {/* Spec card */}
       <footer className="grid gap-6 border-t border-black/10 pt-8 md:grid-cols-12">
