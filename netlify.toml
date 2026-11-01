@@ -5,10 +5,6 @@
 [build.environment]
   NODE_VERSION = "24"
 
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
-
 [[redirects]]
   from = "/assets/*"
   to = "/assets/:splat"
@@ -16,7 +12,7 @@
 
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/ssr"
+  to = "/.netlify/functions/server"
   status = 200
 
 [dev]
