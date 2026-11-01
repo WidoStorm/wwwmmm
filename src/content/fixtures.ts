@@ -81,7 +81,6 @@ export const GALLERY: GalleryItem[] = [
   { id: 'g05', code: 'G-010', title: { es: 'Cromo / trama', en: 'Chrome / halftone', ja: 'クローム／網点', ko: '크롬 / 망점', zh: '铬 / 网点' }, type: 'header', year: 2025, image: 'header-02', medium: { es: '3D + trama', en: '3D + halftone', ja: '3D＋網点', ko: '3D + 망점', zh: '3D + 网点' } },
   { id: 'g06', code: 'G-009', title: { es: 'Azotea al atardecer', en: 'Rooftop at dusk', ja: '夕暮れの屋上', ko: '해질녘 옥상', zh: '黄昏屋顶' }, type: 'cover', year: 2025, image: 'cover-03', medium: { es: 'Ilustración digital', en: 'Digital illustration', ja: 'デジタルイラスト', ko: '디지털 일러스트', zh: '数字插画' } },
   { id: 'g07', code: 'G-008', title: { es: 'Pantalla / glitch', en: 'Screen / glitch', ja: 'スクリーン／グリッチ', ko: '스크린 / 글리치', zh: '屏幕 / 故障' }, type: 'visual', year: 2025, image: 'live-01', medium: { es: 'Visual en bucle, 4K', en: 'Looping visual, 4K', ja: 'ループ映像 4K', ko: '루프 비주얼, 4K', zh: '循环视觉，4K' } },
-  { id: 'g08', code: 'G-007', title: { es: 'Fachada', en: 'Facade', ja: 'ファサード', ko: '파사드', zh: '立面' }, type: 'poster', year: 2024, image: 'ref-02', medium: { es: 'Póster, risografía', en: 'Poster, risograph', ja: 'ポスター、リソグラフ', ko: '포스터, 리소그래프', zh: '海报，孔版印刷' } },
 ]
 
 /* ------------------------------------------------------------------ */

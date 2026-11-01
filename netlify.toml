@@ -1,8 +1,24 @@
 [build]
   command = "vite build"
   publish = "dist/client"
+
 [build.environment]
   NODE_VERSION = "24"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/ssr"
+  status = 200
+
 [dev]
   framework = "#custom"
   command = "npm run dev"
